@@ -1,0 +1,26 @@
+//Get number of agents for title writing
+		FILE *f;
+		f = fopen("iterations\\0.xml", "r");
+		if (f == NULL)
+		{
+			printf("Error opening 0.xml file!\n");
+			return 1;
+		}
+		char tossaway[20], agentNos[5];
+		fscanf(f, "%s %s", tossaway, agentNos);
+		fclose(f);
+
+		//Make title
+		char *title = (char *)malloc(20*sizeof(char)); //error check...
+		strcpy(title, agentNos);
+		strcat(title, " agents.txt");
+
+		f = fopen(title, "a+");
+		if (f == NULL)
+		{
+			printf("Error creating a write file!\n");
+			return 1;
+		}
+		fprintf(f, "%f\n", milliseconds/iterations);
+		fclose(f);
+		free(title);
